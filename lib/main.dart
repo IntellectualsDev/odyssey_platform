@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey_platform/game_selection.dart';
 import 'package:odyssey_platform/landing_page.dart';
+import 'package:odyssey_platform/controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LandingPage(title: 'Odyssey platfrom'),
+      home: const Controller(child: GameSelection()) ,
     );
   }
 }
