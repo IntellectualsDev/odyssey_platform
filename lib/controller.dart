@@ -51,24 +51,14 @@ class _ControllerState extends State<Controller> {
                         ),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircleAvatar(
-                            backgroundColor:
-                                Colors.black, // Color of the circle
-                            radius: 15, // Radius of the circle
-                            child: Text(
-                              'Y', // Letter inside the circle
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.yellow, // Color of the letter
-                                fontSize: 15, // Font size of the letter
-                              ),
-                            ),
-                          ),
+                          ControllerButton(letter: "Y",color: Colors.yellow,),
                           Row(
-                            children: [],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [ControllerButton(letter: 'B',color: Colors.red,), SizedBox(width: 30,), ControllerButton(letter: 'X',color: Colors.blue,)],
                           ),
-                          ControllerButton(),
+                          ControllerButton(letter: 'A',color:Colors.green),
                         ],
                       )),
                   Expanded(
