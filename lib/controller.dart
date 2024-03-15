@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey_platform/game_selection.dart';
+import 'package:odyssey_platform/controller_button.dart';
 
 class Controller extends StatefulWidget {
   final Widget child;
-
+//<a href="https://www.freepik.com/free-photo/leather-macro-shot_1161875.htm#query=leather%20texture&position=1&from_view=keyword&track=ais&uuid=a0a9ae1d-3b43-429e-b54c-e954d3a8c3c6">Image by nikitabuida</a> on Freepik
   const Controller({super.key, required this.child});
 
   @override
@@ -13,7 +14,7 @@ class Controller extends StatefulWidget {
 class _ControllerState extends State<Controller> {
   @override
   Widget build(BuildContext context) {
-        double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
         color: Colors.black,
@@ -27,37 +28,122 @@ class _ControllerState extends State<Controller> {
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0),
                   ),
-                  color: Colors.blue, // Container color
+                  color: Colors.blue,
+                  image: DecorationImage(
+                    image: AssetImage(
+                        'assets/leatherTexture.jpg'), // Replace 'assets/texture_image.png' with your texture image path
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                height: 50, // Container height
+                height: 20, // Container height
               ),
               Row(
                 children: [
                   Container(
-                    color: Colors.blue,
-                    width: 100,
-                    height: 500, // Container height
-                  ),
-                  Spacer(),
+                      width: 150,
+                      height: 550,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'assets/leatherTexture.jpg'), // Replace 'assets/texture_image.png' with your texture image path
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor:
+                                Colors.black, // Color of the circle
+                            radius: 15, // Radius of the circle
+                            child: Text(
+                              'Y', // Letter inside the circle
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.yellow, // Color of the letter
+                                fontSize: 15, // Font size of the letter
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [],
+                          ),
+                          ControllerButton(),
+                        ],
+                      )),
+                  Expanded(
+                      child: Container(
+                    height: 550,
+                    color: Colors.amber,
+                    child: Center(child: Text("Content")),
+                  )),
                   Container(
-                    color: Colors.blue,
-                    width: 100,
-                    height: 500, // Container height
-                  ),
+                      width: 150,
+                      height: 550,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'assets/leatherTexture.jpg'), // Replace 'assets/texture_image.png' with your texture image path
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor:
+                                Colors.black, // Color of the circle
+                            radius: 15, // Radius of the circle
+                            child: Text(
+                              'Y', // Letter inside the circle
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.yellow, // Color of the letter
+                                fontSize: 15, // Font size of the letter
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [],
+                          ),
+                          CircleAvatar(
+                            backgroundColor:
+                                Colors.black, // Color of the circle
+                            radius: 15, // Radius of the circle
+                            child: Text(
+                              'A', // Letter inside the circle
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green, // Color of the letter
+                                fontSize: 15, // Font size of the letter
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
                 ],
               ),
+              
               Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20.0),
                     bottomRight: Radius.circular(20.0),
+                    
                   ),
-                  color: Colors.blue, // Container color
+                  image: DecorationImage(
+                          image: AssetImage(
+                              'assets/leatherTexture.jpg'), // Replace 'assets/texture_image.png' with your texture image path
+                          fit: BoxFit.cover,
+                        ),
+                  color: Colors.blue,
                 ),
-                height: 50, // Container height
+                height: 20,
               ),
             ],
           ),
         ));
   }
 }
+
+
