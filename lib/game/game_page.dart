@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey_platform/nav_bar/NavBar.dart';
-import 'package:sticky_headers/sticky_headers/widget.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
-class StorePage extends StatefulWidget {
-  const StorePage({super.key});
+class GamePage extends StatefulWidget {
+  const GamePage({super.key});
 
   @override
-  State<StorePage> createState() => _StorePageState();
+  State<GamePage> createState() => _GamePageState();
 }
 
-class _StorePageState extends State<StorePage> {
+class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
         double width = MediaQuery.of(context).size.width;
