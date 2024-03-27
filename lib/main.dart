@@ -53,12 +53,30 @@ class MyApp extends StatelessWidget {
           );
         }
         if (path == "/store") {
-          globals.sideBar = 2;
+          globals.sideBar = 1;
           debugPrint("store");
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
             settings: settings,
-            pageBuilder: (_, __, ___) => const StorePage(),
+            pageBuilder: (_, __, ___) => const HomePage(),
+          );
+        }
+        if (path == "/messages") {
+          globals.sideBar = 2;
+          debugPrint("messages");
+          return PageRouteBuilder(
+            transitionDuration: Duration.zero,
+            settings: settings,
+            pageBuilder: (_, __, ___) => const HomePage(),
+          );
+        }
+        if (path == "/score") {
+          globals.sideBar = 3;
+          debugPrint("score");
+          return PageRouteBuilder(
+            transitionDuration: Duration.zero,
+            settings: settings,
+            pageBuilder: (_, __, ___) => const HomePage(),
           );
         }
         if (path == "/authentication") {
