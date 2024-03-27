@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         }
 
         if (path == "/") {
-          globals.page = 0;
+          globals.sideBar = 0;
           debugPrint("mainPage");
           return PageRouteBuilder(
             //remove animation by setting the transition duration to 0 so it appears to just change tabs
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         }
          if (path == "/games") {
           debugPrint("games");
-          globals.page = 1;
+          globals.sideBar = 1;
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
             settings: settings,
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
           );
         }
         if (path == "/store") {
-          globals.page = 2;
+          globals.sideBar = 2;
           debugPrint("store");
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
           );
         }
         if (path == "/authentication") {
-          globals.page = 3;
+          globals.sideBar = 3;
           debugPrint("authentication");
           return PageRouteBuilder(
             transitionDuration: Duration.zero,

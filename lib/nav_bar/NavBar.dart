@@ -47,7 +47,7 @@ class _NavBarState extends State<NavBar> {
                 cursor: SystemMouseCursors.click,
                 child: GestureDetector(
                   onTap: () {
-                    if (globals.page != 0) {
+                    if (globals.sideBar != 0) {
                       Navigator.pushNamed(context, "/");
                     }
                   },
@@ -66,12 +66,12 @@ class _NavBarState extends State<NavBar> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    if (globals.page == 1)
+                    if (globals.sideBar == 1)
                       _selectedNavBarButton("My Games", sectionsFontSize)
                     else
                       _navBarButton("My Games", "/games", sectionsFontSize),
                     const SizedBox(width: 30),
-                    if (globals.page == 2)
+                    if (globals.sideBar == 2)
                       _selectedNavBarButton("Store", sectionsFontSize)
                     else
                       _navBarButton("Store", "/store", sectionsFontSize),
@@ -113,7 +113,7 @@ class _NavBarState extends State<NavBar> {
                               cursor: SystemMouseCursors.click,
                               child: GestureDetector(
               onTap: () {
-                if (globals.page != 0) {
+                if (globals.sideBar != 0) {
                   Navigator.pushNamed(context, "/");
                 }
               },
@@ -128,11 +128,11 @@ class _NavBarState extends State<NavBar> {
                               ),
                             ),
                             
-              if (globals.page == 1)
+              if (globals.sideBar == 1)
                 _selectedNavBarButton("My Games", sectionsFontSize)
               else
                 _navBarButton("My Games", "/games", sectionsFontSize),
-              if (globals.page == 2)
+              if (globals.sideBar == 2)
                 _selectedNavBarButton("Store", sectionsFontSize)
               else
                 _navBarButton("Store", "/store", sectionsFontSize),

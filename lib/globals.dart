@@ -1,3 +1,3 @@
 library personal_portfolio.globals;
 
-int page = 0;
+int sideBar = 0;
