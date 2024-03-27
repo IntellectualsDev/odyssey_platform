@@ -3,6 +3,7 @@ import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:odyssey_platform/globals.dart' as globals;
 
 class NavBar extends StatefulWidget {
+  
   const NavBar({super.key});
 
   @override

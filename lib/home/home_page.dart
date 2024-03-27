@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:odyssey_platform/home/widgets/carrousel_image.dart';
 import 'package:odyssey_platform/nav_bar/NavBar.dart';
 import 'package:odyssey_platform/side_bar.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
+import 'package:overlapped_carousel/overlapped_carousel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,11 +42,10 @@ class _HomePageState extends State<HomePage> {
                   content:  SizedBox(
                     width:
                         MediaQuery.of(context).size.width, // or a fixed width
-                    child: const Column(
+                    child:  Column(
                       children: [
-                        SizedBox(
-                          height: 1500,
-                        )
+                        
+        
                       ],
                     ),
                   ),
