@@ -13,25 +13,25 @@ class Carrousel extends StatelessWidget {
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: imageHeight,
+        height: 200,//(450/338)*300,
         enlargeCenterPage: true,
         autoPlay: true,
-        aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
-        viewportFraction: 0.8,
+        autoPlayInterval: Duration(seconds: 5),
+        autoPlayAnimationDuration: const Duration(milliseconds: 2000),
+        viewportFraction: 0.3,
       ),
       items: imageList.map((imageUrl) {
         return Builder(
           builder: (BuildContext context) {
             return GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/multimedia');
+                
               },
               child: Container(
-                width: 100,
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                width: 500,
+               // margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   image: DecorationImage(

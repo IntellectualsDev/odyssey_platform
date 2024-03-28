@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:odyssey_platform/home/widgets/carrousel.dart';
 import 'package:odyssey_platform/home/widgets/carrousel_image.dart';
 import 'package:odyssey_platform/nav_bar/NavBar.dart';
 import 'package:odyssey_platform/side_bar.dart';
@@ -39,13 +40,16 @@ class _HomePageState extends State<HomePage> {
                 StickyHeader(
                   header:
                       const NavBar(), //only show the navigation bar if the app bar is not there so just when the display is big enough
-                  content:  SizedBox(
+                  content: SizedBox(
                     width:
                         MediaQuery.of(context).size.width, // or a fixed width
-                    child:  Column(
+                    child: const Column(
                       children: [
-                        
-        
+                        Carrousel(imageList: [
+                          "assets/images/games/game1.png",
+                          "assets/images/games/game2.png",
+                          "assets/images/games/game3.png"
+                        ])
                       ],
                     ),
                   ),

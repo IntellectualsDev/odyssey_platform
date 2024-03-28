@@ -67,6 +67,10 @@ flutter:
   assets:
     - assets/leatherTexture.jpg
     - assets/consoleBackground.png
+    - assets/images/games/game1.png
+    - assets/images/games/game2.png
+    - assets/images/games/game3.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
