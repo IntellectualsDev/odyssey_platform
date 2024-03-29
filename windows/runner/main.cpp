@@ -32,6 +32,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   }
   window.SetQuitOnClose(true);
 
+   // Set the minimum window size after creating the window
+  HWND hwnd = window.GetHandle();
+  SetMinimumWindowSize(hwnd, 600, 400);
+
   ::MSG msg;
   while (::GetMessage(&msg, nullptr, 0, 0)) {
     ::TranslateMessage(&msg);

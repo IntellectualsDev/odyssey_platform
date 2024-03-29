@@ -9,18 +9,21 @@ class Carrousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double imageHeight = 400;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    double imageHeight = screenHeight/2.2;
 
     return CarouselSlider(
       options: CarouselOptions(
-        height: 200,//(450/338)*300,
+        enlargeFactor: 0.5,
+        height: imageHeight,
         enlargeCenterPage: true,
         autoPlay: true,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
         autoPlayInterval: Duration(seconds: 5),
         autoPlayAnimationDuration: const Duration(milliseconds: 2000),
-        viewportFraction: 0.3,
+        viewportFraction: 0.5,
       ),
       items: imageList.map((imageUrl) {
         return Builder(
@@ -30,7 +33,7 @@ class Carrousel extends StatelessWidget {
                 
               },
               child: Container(
-                width: 500,
+                width: 700,
                // margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),

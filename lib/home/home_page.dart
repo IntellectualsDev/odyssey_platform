@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   StickyHeader(
                     header:
-                        const NavBar(), //only show the navigation bar if the app bar is not there so just when the display is big enough
+                        const NavBar(),
                     content: SizedBox(
                       width:
                           MediaQuery.of(context).size.width, // or a fixed width

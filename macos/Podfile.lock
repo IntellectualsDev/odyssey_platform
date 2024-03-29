@@ -1,4 +1,6 @@
 PODS:
+  - desktop_window (0.0.1):
+    - FlutterMacOS
   - Firebase/CoreOnly (10.22.0):
     - FirebaseCore (= 10.22.0)
   - firebase_core (2.27.0):
@@ -23,6 +25,7 @@ PODS:
   - PromisesObjC (2.4.0)
 
 DEPENDENCIES:
+  - desktop_window (from `Flutter/ephemeral/.symlinks/plugins/desktop_window/macos`)
   - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
 
@@ -35,12 +38,15 @@ SPEC REPOS:
     - PromisesObjC
 
 EXTERNAL SOURCES:
+  desktop_window:
+    :path: Flutter/ephemeral/.symlinks/plugins/desktop_window/macos
   firebase_core:
     :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
 
 SPEC CHECKSUMS:
+  desktop_window: fb7c4f12c1129f947ac482296b6f14059d57a3c3
   Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
   firebase_core: 94cef1d79e26747286a4808b2345c1ecb8501b11
   FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7

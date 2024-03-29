@@ -12,8 +12,10 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
+  
   @override
   Widget build(BuildContext context) {
+
     return Container(
       color: Color.fromRGBO(128, 128, 128, 0.2),
       child: Column(
@@ -71,12 +73,16 @@ class BarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Row(
       children: [
         (selected)
             ? Container(
                 width: 5,
-                height: 50,
+                height: screenHeight/15,
                 decoration: const BoxDecoration(
                   color: Colors.white, // Color of the rectangle
                   borderRadius: BorderRadius.only(
@@ -105,7 +111,7 @@ class BarButton extends StatelessWidget {
               : Icon(
                   icon,
                   color: Colors.white,
-                  size: 50,
+                  size: screenHeight/15,
                 ),
         ),
         const SizedBox(
