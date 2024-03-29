@@ -4,11 +4,12 @@ import 'package:odyssey_platform/game/game_page.dart';
 import 'package:odyssey_platform/game_selection.dart';
 import 'package:odyssey_platform/home/home_page.dart';
 import 'package:odyssey_platform/landing_page.dart';
+import 'package:odyssey_platform/messages/messages_page.dart';
+import 'package:odyssey_platform/score/score_page.dart';
 import 'package:odyssey_platform/store/store_page.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:odyssey_platform/globals.dart' as globals;
-
 
 void main() {
   setPathUrlStrategy();
@@ -18,7 +19,6 @@ void main() {
 class MyApp extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
             settings: settings,
-            pageBuilder: (_, __, ___) => const HomePage(),
+            pageBuilder: (_, __, ___) => const StorePage(),
           );
         }
         if (path == "/messages") {
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
             settings: settings,
-            pageBuilder: (_, __, ___) => const HomePage(),
+            pageBuilder: (_, __, ___) => const MessagesPage(),
           );
         }
         if (path == "/score") {
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
             settings: settings,
-            pageBuilder: (_, __, ___) => const HomePage(),
+            pageBuilder: (_, __, ___) => const ScorePage(),
           );
         }
         if (path == "/authentication") {
@@ -97,3 +97,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
