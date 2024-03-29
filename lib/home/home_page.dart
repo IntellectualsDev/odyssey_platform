@@ -29,36 +29,44 @@ class _HomePageState extends State<HomePage> {
 //             automaticallyImplyLeading: false, //dissable back button
 //           ),
 //         ),
-        body: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SideBar(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                StickyHeader(
-                  header:
-                      const NavBar(), //only show the navigation bar if the app bar is not there so just when the display is big enough
-                  content: SizedBox(
-                    width:
-                        MediaQuery.of(context).size.width, // or a fixed width
-                    child: const Column(
-                      children: [
-                        Carrousel(imageList: [
-                          "assets/images/games/game1.png",
-                          "assets/images/games/game2.png",
-                          "assets/images/games/game3.png"
-                        ])
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/background_image.jpg'), // Replace 'background_image.jpg' with your image file
+              fit: BoxFit.cover, // Adjust the fit as needed
             ),
           ),
-        ),
-      ],
-    ));
+          child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+          const SideBar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  StickyHeader(
+                    header:
+                        const NavBar(), //only show the navigation bar if the app bar is not there so just when the display is big enough
+                    content: SizedBox(
+                      width:
+                          MediaQuery.of(context).size.width, // or a fixed width
+                      child: const Column(
+                        children: [
+                          Carrousel(imageList: [
+                            "assets/images/games/game1.png",
+                            "assets/images/games/game2.png",
+                            "assets/images/games/game3.png"
+                          ])
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+                ],
+              ),
+        ));
   }
 }
