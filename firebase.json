@@ -1,9 +1,1 @@
-{
-  "firestore": {
-    "rules": "  ",
-    "indexes": "firestore.indexes.json"
-  },
-  "storage": {
-    "rules": "storage.rules"
-  }
-}
+{"firestore":{"rules":"firestore.rules","indexes":"firestore.indexes.json"},"storage":{"rules":"storage.rules"},"flutter":{"platforms":{"macos":{"default":{"projectId":"the-odyssey-project","appId":"1:704782324500:ios:8bde17af573cdde49fa801","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"the-odyssey-project","configurations":{"macos":"1:704782324500:ios:8bde17af573cdde49fa801","web":"1:704782324500:web:b8a1f170cbe497569fa801","windows":"1:704782324500:web:82ef41668ce27d219fa801"}}}}}}

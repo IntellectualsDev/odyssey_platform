@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -36,10 +33,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -54,10 +48,31 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAsHEWUulfSIDO-HB9I6NcmmS0E5deJDd0',
-    appId: '1:704782324500:ios:67602b630f26f8dd9fa801',
+    appId: '1:704782324500:ios:8bde17af573cdde49fa801',
     messagingSenderId: '704782324500',
     projectId: 'the-odyssey-project',
     storageBucket: 'the-odyssey-project.appspot.com',
-    iosBundleId: 'com.example.odysseyPlatform.RunnerTests',
+    iosBundleId: 'com.example.odysseyPlatform',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAq_g-OlTBHLhBY9K3LczTrlhWJQqzXkOk',
+    appId: '1:704782324500:web:b8a1f170cbe497569fa801',
+    messagingSenderId: '704782324500',
+    projectId: 'the-odyssey-project',
+    authDomain: 'the-odyssey-project.firebaseapp.com',
+    storageBucket: 'the-odyssey-project.appspot.com',
+    measurementId: 'G-03R4BYP490',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAq_g-OlTBHLhBY9K3LczTrlhWJQqzXkOk',
+    appId: '1:704782324500:web:82ef41668ce27d219fa801',
+    messagingSenderId: '704782324500',
+    projectId: 'the-odyssey-project',
+    authDomain: 'the-odyssey-project.firebaseapp.com',
+    storageBucket: 'the-odyssey-project.appspot.com',
+    measurementId: 'G-QDG51CNQTZ',
+  );
+
 }

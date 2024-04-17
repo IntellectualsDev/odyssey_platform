@@ -76,7 +76,8 @@ class BarButton extends StatelessWidget {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    double sidePadding = screenHeight/40;
+    double iconSize = screenHeight/25;
     return Row(
       children: [
         (selected)
@@ -92,8 +93,8 @@ class BarButton extends StatelessWidget {
                 ),
               )
             : Container(),
-        const SizedBox(
-          width: 30,
+         SizedBox(
+          width: sidePadding,
         ),
         IconButton(
           onPressed: () {
@@ -104,18 +105,18 @@ class BarButton extends StatelessWidget {
                   angle: -45 * 3.1415926535 / 180, // Rotate by 45 degrees
                   child: Icon(
                     icon,
-                    color: Colors.white,
-                    size: 50,
+                    color: (selected) ? Colors.white : Colors.grey,
+                    size: iconSize,
                   ),
                 )
               : Icon(
                   icon,
-                  color: Colors.white,
-                  size: screenHeight/15,
+                  color: (selected) ? Colors.white : Colors.grey,
+                  size: iconSize,
                 ),
         ),
-        const SizedBox(
-          width: 35,
+         SizedBox(
+          width: sidePadding,
         )
       ],
     );

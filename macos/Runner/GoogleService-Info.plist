@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.odysseyPlatform.RunnerTests</string>
+	<string>com.example.odysseyPlatform</string>
 	<key>PROJECT_ID</key>
 	<string>the-odyssey-project</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:704782324500:ios:67602b630f26f8dd9fa801</string>
+	<string>1:704782324500:ios:8bde17af573cdde49fa801</string>
 </dict>
 </plist>
