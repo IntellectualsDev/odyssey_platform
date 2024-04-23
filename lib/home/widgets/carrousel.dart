@@ -79,23 +79,24 @@ class _CarrouselState extends State<Carrousel> {
 // Define a function to run the executable
 void runExecutable() async {
   // Path to your executable file within the assets folder
-  String executablePath = "/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/games/FPS-Game";
+  String executablePath = "./odyssey_platform/assets/games/FPS-Game";
   // Get the path of the executable file
   String appDir = Directory.current.path;
   debugPrint(appDir);
   String fullPath = '$appDir/$executablePath';
 
+
   // Check if the file exists
-  if (await File(executablePath).exists()) {
+ // if (await File(executablePath).exists()) {
     // Run the executable file
-    Process.run(executablePath, []).then((ProcessResult results) {
-      print("Process exited with code ${results.exitCode}");
-      print(results.stdout);
-      print(results.stderr);
-    }).catchError((error) {
-      print("Error running executable: $error");
-    });
+    // Execute the bash script
+    var result = await Process.run('bash', ['/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Ping-Pong-Game.sh']);
+    
+    // Check if the process was successful
+  if (result.exitCode == 0) {
+    print('Executable started successfully.');
   } else {
-    print("Executable file not found at $fullPath");
+    print('Error starting executable: ${result.stderr}');
   }
+//}
 }

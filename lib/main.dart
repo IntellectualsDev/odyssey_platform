@@ -3,6 +3,7 @@ import 'package:odyssey_platform/authentication/authentication_page.dart';
 import 'package:odyssey_platform/game/game_page.dart';
 import 'package:odyssey_platform/game_selection.dart';
 import 'package:odyssey_platform/home/home_page.dart';
+import 'package:odyssey_platform/home/news_page.dart';
 import 'package:odyssey_platform/landing_page.dart';
 import 'package:odyssey_platform/messages/messages_page.dart';
 import 'package:odyssey_platform/score/score_page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
 
         if (path == "/") {
           globals.sideBar = 0;
+          globals.homePageSelection = 0;
           debugPrint("mainPage");
           return PageRouteBuilder(
             //remove animation by setting the transition duration to 0 so it appears to just change tabs
@@ -43,7 +45,17 @@ class MyApp extends StatelessWidget {
             pageBuilder: (_, __, ___) => const HomePage(),
           );
         }
-         if (path == "/games") {
+        if (path == "/news") {
+          debugPrint("News Page");
+          globals.sideBar = 0;
+          globals.homePageSelection = 1;
+          return PageRouteBuilder(
+            transitionDuration: Duration.zero,
+            settings: settings,
+            pageBuilder: (_, __, ___) => const NewsPage(),
+          );
+        }
+        if (path == "/games") {
           debugPrint("games");
           globals.sideBar = 1;
           return PageRouteBuilder(
@@ -91,10 +103,9 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
           primaryColor: MyColors.action,
-          fontFamily: "Montserrat",         
+          fontFamily: "Montserrat",
           scaffoldBackgroundColor: MyColors.background),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
