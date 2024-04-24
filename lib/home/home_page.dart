@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage> {
                       child: const Column(
                         children: [
                           Carrousel(imageList: [
-                            "assets/images/games/game1.png",
-                            "assets/images/games/game2.png",
+                            "assets/images/fps_images/FPS-game.png",
+                            "assets/images/tennis_images/ping_pong.jpeg",
                           ])
                         ],
                       ),

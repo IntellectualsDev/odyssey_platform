@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:odyssey_platform/authentication/authentication_page.dart';
+import 'package:odyssey_platform/firebase_options.dart';
 import 'package:odyssey_platform/game/game_page.dart';
 import 'package:odyssey_platform/game_selection.dart';
 import 'package:odyssey_platform/home/home_page.dart';
@@ -12,7 +14,11 @@ import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:odyssey_platform/globals.dart' as globals;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   setPathUrlStrategy();
   runApp(MyApp());
 }
@@ -55,15 +61,15 @@ class MyApp extends StatelessWidget {
             pageBuilder: (_, __, ___) => const NewsPage(),
           );
         }
-        if (path == "/games") {
-          debugPrint("games");
-          globals.sideBar = 1;
-          return PageRouteBuilder(
-            transitionDuration: Duration.zero,
-            settings: settings,
-            pageBuilder: (_, __, ___) => const GamePage(),
-          );
-        }
+        // if (path == "/games") {
+        //   debugPrint("games");
+        //   globals.sideBar = 1;
+        //   return PageRouteBuilder(
+        //     transitionDuration: Duration.zero,
+        //     settings: settings,
+        //     pageBuilder: (_, __, ___) => const GamePage(),
+        //   );
+        // }
         if (path == "/store") {
           globals.sideBar = 1;
           debugPrint("store");
@@ -92,7 +98,6 @@ class MyApp extends StatelessWidget {
           );
         }
         if (path == "/authentication") {
-          globals.sideBar = 3;
           debugPrint("authentication");
           return PageRouteBuilder(
             transitionDuration: Duration.zero,
@@ -100,6 +105,8 @@ class MyApp extends StatelessWidget {
             pageBuilder: (_, __, ___) => const AuthenticationPage(),
           );
         }
+        
+
       },
       theme: ThemeData(
           primaryColor: MyColors.action,

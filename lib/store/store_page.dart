@@ -23,7 +23,24 @@ class _StorePageState extends State<StorePage> {
               fit: BoxFit.cover, // Adjust the fit as needed
             ),
           ),
-          child: Row(children: [SideBar()],),)
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SideBar(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  StickyHeader(
+                    header: const NavBar(),
+                    content: Placeholder(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),)
     );
   }
 }
