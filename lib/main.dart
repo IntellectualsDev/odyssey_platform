@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:odyssey_platform/authentication/authentication_page.dart';
 import 'package:odyssey_platform/firebase_options.dart';
 import 'package:odyssey_platform/game/game_page.dart';
 import 'package:odyssey_platform/game_selection.dart';
@@ -97,14 +96,14 @@ class MyApp extends StatelessWidget {
             pageBuilder: (_, __, ___) => const ScorePage(),
           );
         }
-        if (path == "/authentication") {
-          debugPrint("authentication");
-          return PageRouteBuilder(
-            transitionDuration: Duration.zero,
-            settings: settings,
-            pageBuilder: (_, __, ___) => const AuthenticationPage(),
-          );
-        }
+        // if (path == "/authentication") {
+        //   debugPrint("authentication");
+        //   return PageRouteBuilder(
+        //     transitionDuration: Duration.zero,
+        //     settings: settings,
+        //     pageBuilder: (_, __, ___) => const AuthenticationPage(),
+        //   );
+        // }
         
 
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:odyssey_platform/globals.dart' as globals;
@@ -56,7 +57,60 @@ class _NavBarState extends State<NavBar> {
                 const Spacer(),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/authentication");
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: MyColors.background,
+                          content: Container(
+                            width: screenWidth / 2,
+                            height: screenHeight * 0.6,
+                            child: Padding(
+                              padding: const EdgeInsets.all(50.0),
+                              child: Column(
+                                children: [
+                                  Text("Welcome"),
+                                  Text(
+                                      "Enter your email or mobile number to login or create account. No password needed!"),
+                                  Text("Email or mobile phone"),
+                                  Container(
+                                    width: (screenWidth / 2) * 0.8,
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(
+                                              10.0), // Adjust the radius as needed
+                                        ),
+                                        hintText: 'Enter email or mobile',
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text("Log in / Sign up")),
+                                  Text("Or"),
+                                  ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Row(
+                                        children: [
+                                          Icon(FontAwesomeIcons.google),
+                                          SizedBox(
+                                            width: 50,
+                                          ),
+                                          Text("Continue with google")
+                                        ],
+                                      )),
+                                  Text(
+                                      "By continuing you agree with the Odysseys terms and conditions and provacy policy")
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: MyColors.action,

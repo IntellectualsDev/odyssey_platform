@@ -41,6 +41,7 @@ dependencies:
   overlapped_carousel: ^1.0.2
   carousel_slider: ^4.2.1
   desktop_window: ^0.4.0
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:
