@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
+import 'package:odyssey_platform/theme/my_text_styles.dart';
 import 'package:odyssey_platform/globals.dart' as globals;
 
 class NavBar extends StatefulWidget {
@@ -60,55 +61,9 @@ class _NavBarState extends State<NavBar> {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: MyColors.background,
-                          content: Container(
-                            width: screenWidth / 2,
-                            height: screenHeight * 0.6,
-                            child: Padding(
-                              padding: const EdgeInsets.all(50.0),
-                              child: Column(
-                                children: [
-                                  Text("Welcome"),
-                                  Text(
-                                      "Enter your email or mobile number to login or create account. No password needed!"),
-                                  Text("Email or mobile phone"),
-                                  Container(
-                                    width: (screenWidth / 2) * 0.8,
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              10.0), // Adjust the radius as needed
-                                        ),
-                                        hintText: 'Enter email or mobile',
-                                      ),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      child: Text("Log in / Sign up")),
-                                  Text("Or"),
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Row(
-                                        children: [
-                                          Icon(FontAwesomeIcons.google),
-                                          SizedBox(
-                                            width: 50,
-                                          ),
-                                          Text("Continue with google")
-                                        ],
-                                      )),
-                                  Text(
-                                      "By continuing you agree with the Odysseys terms and conditions and provacy policy")
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                        return AuthenticationDialog(
+                            screenWidth: screenWidth,
+                            screenHeight: screenHeight);
                       },
                     );
                   },
@@ -177,4 +132,145 @@ class _NavBarState extends State<NavBar> {
           ),
         ],
       );
+}
+
+class AuthenticationDialog extends StatefulWidget {
+  const AuthenticationDialog({
+    super.key,
+    required this.screenWidth,
+    required this.screenHeight,
+  });
+
+  final double screenWidth;
+  final double screenHeight;
+
+  @override
+  State<AuthenticationDialog> createState() => _AuthenticationDialogState();
+}
+
+class _AuthenticationDialogState extends State<AuthenticationDialog> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  String email = "";
+  String password = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: MyColors.background,
+      content: Container(
+        width: widget.screenWidth / 2,
+        height: widget.screenHeight * 0.6,
+        child: Column(
+          children: [
+            Text(
+              "Welcome",
+              style: MyTextStyles.mainTitle(context),
+            ),
+            Text(
+              "Enter your email or mobile number to login or create account. No password needed!",
+              textAlign: TextAlign.center,
+              style: MyTextStyles.body(context),
+            ),
+            Row(
+              children: [
+                Text("Email or mobile phone",
+                    style: MyTextStyles.body(context)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    onSubmitted: (String value) {
+                      email = value;
+                      password = passwordController.text;
+
+                      debugPrint("email: $email");
+                    debugPrint("password: $password");
+                    },
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.only(
+                          top: 10, bottom: 10, left: 20, right: 20),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                            10.0), // Adjust the radius as needed
+                      ),
+                      hintText: 'Enter email or mobile',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text("Enter password",
+                    style: MyTextStyles.body(context)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    obscureText: true,
+                    obscuringCharacter: "*",
+                    onSubmitted: (String value) {
+                      password = value;
+                      email = emailController.text;
+                      debugPrint("email: $email");
+                    debugPrint("password: $password");
+                    },
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.only(
+                          top: 10, bottom: 10, left: 20, right: 20),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                            10.0), // Adjust the radius as needed
+                      ),
+                      hintText: 'Password',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    email = emailController.text;
+                    password = passwordController.text;
+                    debugPrint("email: $email");
+                    debugPrint("password: $password");
+                  });
+                },
+                child: Text("Log in / Sign up")),
+            Text("Or", style: MyTextStyles.body(context)),
+            ElevatedButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(FontAwesomeIcons.google),
+                    SizedBox(
+                      width: 50,
+                    ),
+                    Text("Continue with google",
+                        style: MyTextStyles.body(context))
+                  ],
+                )),
+            Text(
+                "By continuing you agree with the Odysseys terms and conditions and provacy policy",
+                style: MyTextStyles.body(context))
+          ],
+        ),
+      ),
+    );
+  }
 }
