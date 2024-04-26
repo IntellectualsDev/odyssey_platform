@@ -21,11 +21,11 @@ class MyTextStyles {
     );
   }
 
-  static TextStyle bodyText1(BuildContext context) {
+  static TextStyle buttonText(BuildContext context) {
     return TextStyle(
-      fontSize: _getScreenHeight(context) * 0.6, // Example: Font size is 60% of headline1
+      fontSize: _getScreenHeight(context) * 0.025, // Example: Font size is 60% of headline1
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: Colors.white,
     );
   }
 

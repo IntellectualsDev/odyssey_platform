@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -159,20 +160,25 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: MyColors.background,
-      content: Container(
-        width: widget.screenWidth / 2,
-        height: widget.screenHeight * 0.6,
+      content: Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 50, left: 10,right: 10),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               "Welcome",
               style: MyTextStyles.mainTitle(context),
             ),
-            Text(
-              "Enter your email or mobile number to login or create account. No password needed!",
-              textAlign: TextAlign.center,
-              style: MyTextStyles.body(context),
+            const SizedBox(height: 20,),
+            Container(
+              width: 400,
+              child: Text(
+                "Enter your email and password to login. If you dont have an account simply enter an email and a password to create your account ",
+                textAlign: TextAlign.center,
+                style: MyTextStyles.body(context),
+              ),
             ),
+            const SizedBox(height: 20,),
             Row(
               children: [
                 Text("Email or mobile phone",
@@ -186,9 +192,9 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                     onSubmitted: (String value) {
                       email = value;
                       password = passwordController.text;
-
+        
                       debugPrint("email: $email");
-                    debugPrint("password: $password");
+                      debugPrint("password: $password");
                     },
                     controller: emailController,
                     decoration: InputDecoration(
@@ -207,10 +213,12 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
-                Text("Enter password",
-                    style: MyTextStyles.body(context)),
+                Text("Enter password", style: MyTextStyles.body(context)),
               ],
             ),
             Row(
@@ -223,7 +231,7 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                       password = value;
                       email = emailController.text;
                       debugPrint("email: $email");
-                    debugPrint("password: $password");
+                      debugPrint("password: $password");
                     },
                     controller: passwordController,
                     decoration: InputDecoration(
@@ -242,29 +250,43 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             ElevatedButton(
+              
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.action,
+                  elevation: 4,
+                ),
                 onPressed: () {
                   setState(() {
                     email = emailController.text;
                     password = passwordController.text;
                     debugPrint("email: $email");
                     debugPrint("password: $password");
+                    createAccount(email, password);
                   });
                 },
-                child: Text("Log in / Sign up")),
-            Text("Or", style: MyTextStyles.body(context)),
-            ElevatedButton(
-                onPressed: () {},
-                child: Row(
-                  children: [
-                    Icon(FontAwesomeIcons.google),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    Text("Continue with google",
-                        style: MyTextStyles.body(context))
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Log in / Sign up", style: MyTextStyles.buttonText(context),),
                 )),
+                //TODO implement google
+            // Text("Or", style: MyTextStyles.body(context)),
+            // ElevatedButton(
+            //     onPressed: () {},
+            //     child: Row(
+            //       children: [
+            //         Icon(FontAwesomeIcons.google),
+            //         SizedBox(
+            //           width: 50,
+            //         ),
+            //         Text("Continue with google",
+            //             style: MyTextStyles.body(context))
+            //       ],
+            //     )),
+            const SizedBox(height: 20,),
             Text(
                 "By continuing you agree with the Odysseys terms and conditions and provacy policy",
                 style: MyTextStyles.body(context))
@@ -273,4 +295,27 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
       ),
     );
   }
+
+Future<void> createAccount(String email, String password) async {
+  try {
+  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: email,
+    password: password,
+  );
+  debugPrint("User signed in with email: ${userCredential.user!.uid}");
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+  else{
+    debugPrint(e.toString());
+  }
+} catch (e) {
+  
+  debugPrint(e.toString());
+}
+}
+
 }

@@ -16,7 +16,7 @@ import 'package:odyssey_platform/globals.dart' as globals;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
+  options: DefaultFirebaseOptions.macos,
 );
   setPathUrlStrategy();
   runApp(MyApp());
