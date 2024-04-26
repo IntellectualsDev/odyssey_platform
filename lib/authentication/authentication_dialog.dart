@@ -1,0 +1,189 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:odyssey_platform/theme/my_text_styles.dart';
+import 'package:odyssey_platform/theme/my_colors.dart';
+
+class AuthenticationDialog extends StatefulWidget {
+  const AuthenticationDialog({
+    super.key,
+    required this.screenWidth,
+    required this.screenHeight,
+  });
+
+  final double screenWidth;
+  final double screenHeight;
+
+  @override
+  State<AuthenticationDialog> createState() => _AuthenticationDialogState();
+}
+
+class _AuthenticationDialogState extends State<AuthenticationDialog> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  String email = "";
+  String password = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: MyColors.background,
+      content: Padding(
+        padding: const EdgeInsets.only(top: 20, bottom: 50, left: 10,right: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Welcome",
+              style: MyTextStyles.mainTitle(context),
+            ),
+            const SizedBox(height: 20,),
+            Container(
+              width: 400,
+              child: Text(
+                "Enter your email and password to login. If you dont have an account simply enter an email and a password to create your account ",
+                textAlign: TextAlign.center,
+                style: MyTextStyles.body(context),
+              ),
+            ),
+            const SizedBox(height: 20,),
+            Row(
+              children: [
+                Text("Email or mobile phone",
+                    style: MyTextStyles.body(context)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    onSubmitted: (String value) {
+                      email = value;
+                      password = passwordController.text;
+        
+                      debugPrint("email: $email");
+                      debugPrint("password: $password");
+                    },
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.only(
+                          top: 10, bottom: 10, left: 20, right: 20),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                            10.0), // Adjust the radius as needed
+                      ),
+                      hintText: 'Enter email or mobile',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Text("Enter password", style: MyTextStyles.body(context)),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    obscureText: true,
+                    obscuringCharacter: "*",
+                    onSubmitted: (String value) {
+                      password = value;
+                      email = emailController.text;
+                      debugPrint("email: $email");
+                      debugPrint("password: $password");
+                    },
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.only(
+                          top: 10, bottom: 10, left: 20, right: 20),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                            10.0), // Adjust the radius as needed
+                      ),
+                      hintText: 'Password',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: MyColors.action,
+                  elevation: 4,
+                ),
+                onPressed: () {
+                  setState(() {
+                    email = emailController.text;
+                    password = passwordController.text;
+                    debugPrint("email: $email");
+                    debugPrint("password: $password");
+                    createAccount(email, password);
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Log in / Sign up", style: MyTextStyles.buttonText(context),),
+                )),
+                //TODO implement google
+            // Text("Or", style: MyTextStyles.body(context)),
+            // ElevatedButton(
+            //     onPressed: () {},
+            //     child: Row(
+            //       children: [
+            //         Icon(FontAwesomeIcons.google),
+            //         SizedBox(
+            //           width: 50,
+            //         ),
+            //         Text("Continue with google",
+            //             style: MyTextStyles.body(context))
+            //       ],
+            //     )),
+            const SizedBox(height: 20,),
+            Text(
+                "By continuing you agree with the Odysseys terms and conditions and provacy policy",
+                style: MyTextStyles.body(context))
+          ],
+        ),
+      ),
+    );
+  }
+
+Future<void> createAccount(String email, String password) async {
+  try {
+  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: email,
+    password: password,
+  );
+  debugPrint("User signed in with email: ${userCredential.user!.uid}");
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+  else{
+    debugPrint(e.toString());
+  }
+} catch (e) {
+  
+  debugPrint(e.toString());
+}
+}
+
+}
