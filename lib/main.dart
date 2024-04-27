@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:odyssey_platform/firebase_options.dart';
@@ -19,6 +20,7 @@ void main() async {
   options: DefaultFirebaseOptions.macos,
 );
   setPathUrlStrategy();
+  setupAuthListener();
   runApp(MyApp());
 }
 
@@ -114,4 +116,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
+}
+
+void setupAuthListener() {
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user != null) {
+      print('User is signed in with UID: ${user.uid}');
+    } else {
+      print('User is signed out');
+    }
+  });
 }

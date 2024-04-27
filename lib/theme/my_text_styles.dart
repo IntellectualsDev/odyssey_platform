@@ -29,5 +29,13 @@ class MyTextStyles {
     );
   }
 
+    static TextStyle errorMessage(BuildContext context) {
+    return TextStyle(
+      fontSize: _getScreenHeight(context) * 0.02, // Example: Font size is 60% of headline1
+      fontWeight: FontWeight.normal,
+      color: Colors.red,
+    );
+  }
+
   // Add more text styles as needed...
 }

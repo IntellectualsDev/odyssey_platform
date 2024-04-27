@@ -23,13 +23,15 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
 
   String email = "";
   String password = "";
+  String errorMessage = "";
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: MyColors.background,
       content: Padding(
-        padding: const EdgeInsets.only(top: 20, bottom: 50, left: 10,right: 10),
+        padding:
+            const EdgeInsets.only(top: 20, bottom: 50, left: 10, right: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -37,7 +39,9 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
               "Welcome",
               style: MyTextStyles.mainTitle(context),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Container(
               width: 400,
               child: Text(
@@ -46,7 +50,9 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                 style: MyTextStyles.body(context),
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Text("Email or mobile phone",
@@ -60,7 +66,7 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                     onSubmitted: (String value) {
                       email = value;
                       password = passwordController.text;
-        
+
                       debugPrint("email: $email");
                       debugPrint("password: $password");
                     },
@@ -121,8 +127,13 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
             const SizedBox(
               height: 20,
             ),
+            (errorMessage != "") ? Text(errorMessage,style: MyTextStyles.errorMessage(context),) : Container(),
+            (errorMessage != "")
+                ? const SizedBox(
+                    height: 20,
+                  )
+                : Container(),
             ElevatedButton(
-              
                 style: ElevatedButton.styleFrom(
                   backgroundColor: MyColors.action,
                   elevation: 4,
@@ -138,9 +149,12 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Log in / Sign up", style: MyTextStyles.buttonText(context),),
+                  child: Text(
+                    "Log in / Sign up",
+                    style: MyTextStyles.buttonText(context),
+                  ),
                 )),
-                //TODO implement google
+            //TODO implement google
             // Text("Or", style: MyTextStyles.body(context)),
             // ElevatedButton(
             //     onPressed: () {},
@@ -154,7 +168,9 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
             //             style: MyTextStyles.body(context))
             //       ],
             //     )),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Text(
                 "By continuing you agree with the Odysseys terms and conditions and provacy policy",
                 style: MyTextStyles.body(context))
@@ -164,26 +180,58 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
     );
   }
 
-Future<void> createAccount(String email, String password) async {
-  try {
-  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: email,
-    password: password,
-  );
-  debugPrint("User signed in with email: ${userCredential.user!.uid}");
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'weak-password') {
-    print('The password provided is too weak.');
-  } else if (e.code == 'email-already-in-use') {
-    print('The account already exists for that email.');
+  Future<void> createAccount(String email, String password) async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      debugPrint("User signed in with email: ${userCredential.user!.uid}");
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        //account found so try to sign in
+        debugPrint(
+            'The account already exists for that email so now trying to sign in');
+        try {
+          UserCredential userCredential = await FirebaseAuth.instance
+              .signInWithEmailAndPassword(email: email, password: password);
+          debugPrint("User signed in with email: ${userCredential.user!.uid}");
+          Navigator.of(context).pop();
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'user-not-found') {
+            debugPrint('No user found for that email.');
+          } else if (e.code == 'invalid-credential') {
+            errorMessage =
+                'User is already registered, but the password does not math';
+            print('Wrong password provided for that user.');
+          }
+        }
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      } else if (e.code == 'weak-password') {
+        
+setState(() {
+  errorMessage = 'Password is too weak';
+});
+        print('The password provided is too weak.');
+      }
+      else if (e.code == 'invalid-email') {
+        
+setState(() {
+  errorMessage = 'Invalid email';
+});
+        debugPrint(e.toString());
+      }
+       else {
+        debugPrint(e.toString());
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
-  else{
-    debugPrint(e.toString());
-  }
-} catch (e) {
-  
-  debugPrint(e.toString());
-}
-}
-
 }
