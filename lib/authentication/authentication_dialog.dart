@@ -69,6 +69,14 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
 
                       debugPrint("email: $email");
                       debugPrint("password: $password");
+
+                      if (password == "") {
+                        setState(() {
+                          errorMessage = "Please provide a password";
+                        });
+                      } else {
+                        createAccount(email, password);
+                      }
                     },
                     controller: emailController,
                     decoration: InputDecoration(
@@ -106,6 +114,13 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
                       email = emailController.text;
                       debugPrint("email: $email");
                       debugPrint("password: $password");
+                      if (email == "") {
+                        setState(() {
+                          errorMessage = "Please enter an email address";
+                        });
+                      } else {
+                        createAccount(email, password);
+                      }
                     },
                     controller: passwordController,
                     decoration: InputDecoration(
@@ -127,7 +142,12 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
             const SizedBox(
               height: 20,
             ),
-            (errorMessage != "") ? Text(errorMessage,style: MyTextStyles.errorMessage(context),) : Container(),
+            (errorMessage != "")
+                ? Text(
+                    errorMessage,
+                    style: MyTextStyles.errorMessage(context),
+                  )
+                : Container(),
             (errorMessage != "")
                 ? const SizedBox(
                     height: 20,
@@ -203,9 +223,15 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
           if (e.code == 'user-not-found') {
             debugPrint('No user found for that email.');
           } else if (e.code == 'invalid-credential') {
-            errorMessage =
-                'User is already registered, but the password does not math';
-            print('Wrong password provided for that user.');
+            setState(() {
+              errorMessage =
+                  'User is already registered, but the password does not math';
+              print('Wrong password provided for that user.');
+            });
+          } else {
+            setState(() {
+              errorMessage = e.code;
+            });
           }
         }
         UserCredential userCredential =
@@ -214,23 +240,25 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
           password: password,
         );
       } else if (e.code == 'weak-password') {
-        
-setState(() {
-  errorMessage = 'Password is too weak';
-});
+        setState(() {
+          errorMessage = 'Password is too weak';
+        });
         print('The password provided is too weak.');
-      }
-      else if (e.code == 'invalid-email') {
-        
-setState(() {
-  errorMessage = 'Invalid email';
-});
+      } else if (e.code == 'invalid-email') {
+        setState(() {
+          errorMessage = 'Invalid email';
+        });
         debugPrint(e.toString());
-      }
-       else {
+      } else {
+        setState(() {
+          errorMessage = e.toString();
+        });
         debugPrint(e.toString());
       }
     } catch (e) {
+      setState(() {
+        errorMessage = e.toString();
+      });
       debugPrint(e.toString());
     }
   }

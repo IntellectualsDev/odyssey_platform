@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:odyssey_platform/authentication/authentication_dialog.dart';
+import 'package:odyssey_platform/authentication/avatar.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:odyssey_platform/theme/my_text_styles.dart';
 import 'package:odyssey_platform/globals.dart' as globals;
@@ -18,6 +19,18 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   Color _navbarColor = Colors.transparent;
 
+void setupAuthListener() {
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user != null) {
+      
+      
+      print('User is signed in with UID: ${user.uid}');
+    } else {
+      print('User is signed out');
+    }
+  });
+}
+
   @override
   Widget build(BuildContext context) {
 // Get the MediaQueryData for the current context
@@ -29,67 +42,73 @@ class _NavBarState extends State<NavBar> {
     double sectionsFontSizeLarge = screenWidth / 80;
     double textButtonsHeight = screenHeight / 35;
 
-    return NotificationListener<ScrollUpdateNotification>(
-      child: LayoutBuilder(builder: (context, constraints) {
-        return Container(
-          child: Padding(
-            padding: EdgeInsets.only(top: 15, bottom: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                (globals.sideBar == 0)
-                    ? (globals.homePageSelection == 0
-                        ? _selectedNavBarButton("My Games", textButtonsHeight)
-                        : _navBarButton("My Games", '/', textButtonsHeight))
-                    : Container(),
-                const SizedBox(
-                  width: 20,
-                ),
-                (globals.sideBar == 0)
-                    ? (globals.homePageSelection == 1)
-                        ? _selectedNavBarButton("What's New", textButtonsHeight)
-                        : _navBarButton(
-                            "What's New", '/news', textButtonsHeight)
-                    : Container(),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AuthenticationDialog(
-                            screenWidth: screenWidth,
-                            screenHeight: screenHeight);
-                      },
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: MyColors.action,
-                    elevation: 4,
+    return ValueListenableBuilder<bool>(
+      valueListenable: globals.signedIn,
+      builder: (context, isSigenedIn, child ) {
+      return NotificationListener<ScrollUpdateNotification>(
+        child: LayoutBuilder(builder: (context, constraints) {
+          return Container(
+            child: Padding(
+              padding: EdgeInsets.only(top: 15, bottom: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: 20,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Sign in/Log in',
-                        softWrap: false, // Text won't wrap to the next line
-                        style: TextStyle(
-                            color: Colors.white, fontSize: textButtonsHeight)),
+                  const SizedBox(
+                    width: 20,
                   ),
-                ),
-                SizedBox(
-                  width: 40,
-                )
-              ],
+                  (globals.sideBar == 0)
+                      ? (globals.homePageSelection == 0
+                          ? _selectedNavBarButton("My Games", textButtonsHeight)
+                          : _navBarButton("My Games", '/', textButtonsHeight))
+                      : Container(),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  (globals.sideBar == 0)
+                      ? (globals.homePageSelection == 1)
+                          ? _selectedNavBarButton("What's New", textButtonsHeight)
+                          : _navBarButton(
+                              "What's New", '/news', textButtonsHeight)
+                      : Container(),
+                  const Spacer(),
+                  (globals.signedIn.value) ? Avatar(onPressed: () {}):
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AuthenticationDialog(
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight);
+                        },
+                      );
+                    },
+                    
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MyColors.action,
+                      elevation: 4,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Sign in/Log in',
+                          softWrap: false, // Text won't wrap to the next line
+                          style: TextStyle(
+                              color: Colors.white, fontSize: textButtonsHeight)),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-        ;
-      }),
+          );
+          ;
+        }),
+      );}
     );
   }
 

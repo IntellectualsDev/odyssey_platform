@@ -21,6 +21,13 @@ class MyTextStyles {
     );
   }
 
+  static TextStyle bodyDark(BuildContext context) {
+    return TextStyle(
+      fontSize: _getScreenHeight(context) * 0.02, // Example: Font size is 80% of headline1
+      color: Colors.black,
+    );
+  }
+
   static TextStyle buttonText(BuildContext context) {
     return TextStyle(
       fontSize: _getScreenHeight(context) * 0.025, // Example: Font size is 60% of headline1

@@ -121,6 +121,8 @@ class MyApp extends StatelessWidget {
 void setupAuthListener() {
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user != null) {
+      globals.signedIn.value = true;
+      globals.userEmail = user.email;
       print('User is signed in with UID: ${user.uid}');
     } else {
       print('User is signed out');
