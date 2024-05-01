@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:odyssey_platform/authentication/authentication_dialog.dart';
 import 'package:odyssey_platform/authentication/avatar.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
@@ -19,17 +20,15 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   Color _navbarColor = Colors.transparent;
 
-void setupAuthListener() {
-  FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    if (user != null) {
-      
-      
-      print('User is signed in with UID: ${user.uid}');
-    } else {
-      print('User is signed out');
-    }
-  });
-}
+  void setupAuthListener() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user != null) {
+        print('User is signed in with UID: ${user.uid}');
+      } else {
+        print('User is signed out');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,73 +42,79 @@ void setupAuthListener() {
     double textButtonsHeight = screenHeight / 35;
 
     return ValueListenableBuilder<bool>(
-      valueListenable: globals.signedIn,
-      builder: (context, isSigenedIn, child ) {
-      return NotificationListener<ScrollUpdateNotification>(
-        child: LayoutBuilder(builder: (context, constraints) {
-          return Container(
-            child: Padding(
-              padding: EdgeInsets.only(top: 15, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    width: 20,
+        valueListenable: globals.signedIn,
+        builder: (context, isSigenedIn, child) {
+          return NotificationListener<ScrollUpdateNotification>(
+            child: LayoutBuilder(builder: (context, constraints) {
+              return Container(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      (globals.sideBar == 0)
+                          ? (globals.homePageSelection == 0
+                              ? _selectedNavBarButton(
+                                  "My Games", textButtonsHeight)
+                              : _navBarButton(
+                                  "My Games", '/', textButtonsHeight))
+                          : Container(),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      (globals.sideBar == 0)
+                          ? (globals.homePageSelection == 1)
+                              ? _selectedNavBarButton(
+                                  "About us", textButtonsHeight)
+                              : _navBarButton(
+                                  "About us", '/news', textButtonsHeight)
+                          : Container(),
+                      const Spacer(),
+                      (globals.signedIn.value)
+                          ? Avatar(onPressed: () {})
+                          : ElevatedButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AuthenticationDialog(
+                                        message: "Welcome",
+                                        screenWidth: screenWidth,
+                                        screenHeight: screenHeight);
+                                  },
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: MyColors.action,
+                                elevation: 4,
+                              ),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text('Sign in/Log in',
+                                      softWrap:
+                                          false, // Text won't wrap to the next line
+                                      style: GoogleFonts.trispace(
+                                          textStyle: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: textButtonsHeight)))),
+                            ),
+                      SizedBox(
+                        width: 40,
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  (globals.sideBar == 0)
-                      ? (globals.homePageSelection == 0
-                          ? _selectedNavBarButton("My Games", textButtonsHeight)
-                          : _navBarButton("My Games", '/', textButtonsHeight))
-                      : Container(),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  (globals.sideBar == 0)
-                      ? (globals.homePageSelection == 1)
-                          ? _selectedNavBarButton("What's New", textButtonsHeight)
-                          : _navBarButton(
-                              "What's New", '/news', textButtonsHeight)
-                      : Container(),
-                  const Spacer(),
-                  (globals.signedIn.value) ? Avatar(onPressed: () {}):
-                  ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AuthenticationDialog(
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight);
-                        },
-                      );
-                    },
-                    
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: MyColors.action,
-                      elevation: 4,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Sign in/Log in',
-                          softWrap: false, // Text won't wrap to the next line
-                          style: TextStyle(
-                              color: Colors.white, fontSize: textButtonsHeight)),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 40,
-                  )
-                ],
-              ),
-            ),
+                ),
+              );
+              ;
+            }),
           );
-          ;
-        }),
-      );}
-    );
+        });
   }
 
 //botton que no tiene funcionalidad pero es para el diseno para mostrar la pagina en donde el usuario esta en la navbar
@@ -118,10 +123,12 @@ void setupAuthListener() {
           const SizedBox(height: 10),
           TextButton(
             onPressed: () {},
-            child: Text(
-              text,
-              style: TextStyle(color: Colors.white, fontSize: fontSize),
-            ),
+            child: Text(text,
+                style: GoogleFonts.trispace(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSize,
+                        fontWeight: FontWeight.bold))),
           ),
           const SizedBox(height: 5), // Add some spacing between text and oval
           Container(
@@ -143,10 +150,12 @@ void setupAuthListener() {
             onPressed: () {
               Navigator.pushNamed(context, path);
             },
-            child: Text(
-              text,
-              style: TextStyle(color: Colors.white, fontSize: fontSize),
-            ),
+            child: Text(text,
+                style: GoogleFonts.trispace(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: fontSize,
+                        fontWeight: FontWeight.bold))),
           ),
           const SizedBox(
             height: 10,
@@ -154,4 +163,3 @@ void setupAuthListener() {
         ],
       );
 }
-

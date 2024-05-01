@@ -43,52 +43,84 @@ class _AvatarState extends State<Avatar> {
                     child: ListTile(
                       title: CircleAvatar(
                         backgroundColor: MyColors.action,
-                        backgroundImage:
-                            widget.imageUrl != null ? NetworkImage(widget.imageUrl!) : null,
-                        radius: 20, // Adjust the radius as needed
+                        backgroundImage: widget.imageUrl != null
+                            ? NetworkImage(widget.imageUrl!)
+                            : null,
+                        radius: 20,
                         child: widget.imageUrl == null
-                            ? Icon(Icons.person)
-                            : null, // Use default icon if no image URL provided
+                            ? Icon(
+                                Icons.person,
+                              )
+                            : null,
                       ),
                     )),
                 PopupMenuItem<int>(
                   value: 1,
-                  child: ListTile(
-                      title: Text(
-                    globals.userEmail!,
-                    style: MyTextStyles.bodyDark(context),
-                  )),
-                ),
-                PopupMenuItem<int>(
-                  value: 2,
-                  child: ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        globals.userEmail!,
+                        style: MyTextStyles.bodyDark(context),
+                      ),
+                    ],
                   ),
                 ),
                 PopupMenuItem<int>(
+                  value: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.settings),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextButton(
+                        child: Text('Settings', style: MyTextStyles.textButton(context),),
+                        onPressed: () {}
+                        ,
+                      )
+                    ],
+                  ),
+                ),
+                 PopupMenuItem<int>(
                   value: 3,
-                  child: ListTile(
-                    leading: Icon(Icons.logout_rounded),
-                    title: TextButton(
-                      child: Text('Logout'),
-                      onPressed: () async {
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.logout_rounded),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextButton(
+                        child:  Text('Logout', style: MyTextStyles.textButton(context),),
+                        onPressed: () async {
                         await FirebaseAuth.instance.signOut();
                         setState(() {
                           globals.signedIn.value = false;
                           Navigator.pop(context);
                         });
-                        
                       },
-                    ),
+                        
+                      )
+                    ],
                   ),
+                  onTap: () async { //en el on tap se cierra solito 
+                        await FirebaseAuth.instance.signOut();
+                        setState(() {
+                          globals.signedIn.value = false;
+                          
+                        });
+                      },
                 ),
+              
               ],
             );
           },
           icon: CircleAvatar(
             backgroundColor: MyColors.action,
-            backgroundImage: widget.imageUrl != null ? NetworkImage(widget.imageUrl!) : null,
+            backgroundImage:
+                widget.imageUrl != null ? NetworkImage(widget.imageUrl!) : null,
             radius: 20, // Adjust the radius as needed
             child: widget.imageUrl == null
                 ? Icon(Icons.person)

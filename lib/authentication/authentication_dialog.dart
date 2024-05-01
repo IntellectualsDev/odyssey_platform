@@ -4,14 +4,16 @@ import 'package:odyssey_platform/theme/my_text_styles.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 
 class AuthenticationDialog extends StatefulWidget {
-  const AuthenticationDialog({
+   AuthenticationDialog({
     super.key,
     required this.screenWidth,
     required this.screenHeight,
+    required this.message
   });
 
   final double screenWidth;
   final double screenHeight;
+  String message;
 
   @override
   State<AuthenticationDialog> createState() => _AuthenticationDialogState();
@@ -36,7 +38,7 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Welcome",
+              widget.message,
               style: MyTextStyles.mainTitle(context),
             ),
             const SizedBox(

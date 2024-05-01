@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:odyssey_platform/nav_bar/NavBar.dart';
 import 'package:odyssey_platform/side_bar.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
+import 'package:odyssey_platform/globals.dart' as globals;
 
 class StorePage extends StatefulWidget {
   const StorePage({super.key});
@@ -33,7 +34,7 @@ class _StorePageState extends State<StorePage> {
                 children: <Widget>[
                   StickyHeader(
                     header: const NavBar(),
-                    content: Placeholder(),
+                    content: (globals.signedIn.value) ? StoreSignedIn() : StoreNotSignedIn() ,
                   ),
                 ],
               ),
@@ -43,4 +44,13 @@ class _StorePageState extends State<StorePage> {
       ),)
     );
   }
+
+  Widget StoreSignedIn(){
+    return Placeholder();
+  }
+
+  Widget StoreNotSignedIn(){
+    return Placeholder();
+  }
+
 }
