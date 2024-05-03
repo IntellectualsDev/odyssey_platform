@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:odyssey_platform/designWidgets/my_button.dart';
+import 'package:odyssey_platform/designWidgets/video_container.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:odyssey_platform/theme/my_text_styles.dart';
 
@@ -10,21 +11,23 @@ class PlayGameWidget extends StatelessWidget {
   final String gameName;
   final String gameDescription;
   final String bash;
+  final String videoUrl;
 
   const PlayGameWidget(
       {super.key,
       required this.imageUrl,
       required this.gameName,
       required this.gameDescription,
-      required this.bash});
+      required this.bash,
+      required this.videoUrl});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    double dialogWidth = screenWidth * 0.75;
-    double dialogHeight = screenHeight * 0.75;
+    double dialogWidth = screenWidth * 0.8;
+    double dialogHeight = screenHeight * 0.8;
     double paddingBetween = screenHeight*0.01;
 
     return Dialog(
@@ -70,14 +73,18 @@ class PlayGameWidget extends StatelessWidget {
             Container(
               width: dialogWidth * 0.9,
               height: dialogHeight * 0.7,
-              color: MyColors.action,
+              child: VideoContainer(videoUrl: videoUrl,),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             ),
             SizedBox(
               height: paddingBetween,
             ),
-            Text(
-              gameDescription,
-              style: MyTextStyles.body(context),
+            Container(
+              width: dialogWidth*0.8,
+              child: Text(
+                gameDescription,
+                style: MyTextStyles.body(context),
+              ),
             ),
             SizedBox(
               height: paddingBetween,

@@ -58,21 +58,36 @@ class _CarrouselState extends State<Carrousel> {
                   _carouselController.animateToPage(index);
                 } else if (globals.signedIn.value) {
                   if (imageUrl == "assets/images/fps_images/FPS-game.png") {
-                    openPlayGameWidget(context, imageUrl, "FPS Game",
-                        "Basic first person shooter game with basic functionality developed using raylib",'/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_FPS-Game.sh');
+                    openPlayGameWidget(
+                        context,
+                        imageUrl,
+                        "FPS Game",
+                        "Basic first person shooter game with basic functionality developed using raylib",
+                        '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_FPS-Game.sh',
+                        "assets/videos/FPSGameplay.mov");
                     //runFPSgame();
                   } else if (imageUrl ==
                       "assets/images/pong_images/ping_pong.jpeg") {
-                    openPlayGameWidget(context, imageUrl, "Pong Game",
-                        "Basic pong game implemented using sfml",'/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Ping-Pong-Game.sh');
+                    openPlayGameWidget(
+                        context,
+                        imageUrl,
+                        "Pong Game",
+                        "Basic pong game implemented using sfml",
+                        '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Ping-Pong-Game.sh',
+                        "assets/videos/PongGameplay.mov");
 
                     //runPongGame();
                   } else if (imageUrl ==
                       "assets/images/tennis_images/Tennis.jpg") {
-                    openPlayGameWidget(context, imageUrl, "Tennis Game",
-                        "Improved version of the pong game",'/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Tennis-Game.sh');
+                    openPlayGameWidget(
+                        context,
+                        imageUrl,
+                        "Tennis Game",
+                        "Improved version of the pong game",
+                        '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Tennis-Game.sh',
+                        "assets/videos/tennisGameplay.mov");
 
-                   // runTennisGame();
+                    // runTennisGame();
                   }
                 } else {
                   showDialog(
@@ -130,7 +145,7 @@ class _CarrouselState extends State<Carrousel> {
 }
 
 void openPlayGameWidget(BuildContext context, String imageUrl, String gameName,
-    String gameDescription, String bash) {
+    String gameDescription, String bash, String videoUrl) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -139,6 +154,7 @@ void openPlayGameWidget(BuildContext context, String imageUrl, String gameName,
         gameName: gameName,
         gameDescription: gameDescription,
         bash: bash,
+        videoUrl: videoUrl,
       ); // Replace YourDialogWidget() with the widget you want to show as a dialog
     },
   );

@@ -45,6 +45,7 @@ dependencies:
   firebase_auth: ^4.19.4
   flutter_stripe: ^10.1.1
   google_fonts: ^6.2.1
+  video_player: ^2.8.6
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +80,10 @@ flutter:
     - "assets/images/fps_images/FPS-game.png"
     - "assets/images/pong_images/ping_pong.jpeg"
     - "assets/images/tennis_images/Tennis.jpg"
+    - "assets/videos/tennisGameplay.mov"
+    - "assets/videos/PongGameplay.mov"
+    - "assets/videos/FPSGameplay.mov"
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

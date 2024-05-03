@@ -28,7 +28,7 @@ class GamesGalleryDialog extends StatelessWidget {
               height: 20,
             ),
             Container(
-              height: screenHeight*0.64,
+              height: screenHeight*0.65,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -36,7 +36,8 @@ class GamesGalleryDialog extends StatelessWidget {
                         gameTitle: "FPS Game",
                         imageUrl: "assets/images/fps_images/FPS-game.png",
                         gameDescription:
-                            "Basic first person shooter game with basic functionality developed using raylib "),
+                            "Basic first person shooter game with basic functionality developed using raylib ",
+                            bash: '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_FPS-Game.sh',),
                     SizedBox(
                       height: screenWidth * 0.05,
                     ),
@@ -44,7 +45,7 @@ class GamesGalleryDialog extends StatelessWidget {
                         gameTitle: "Pong Game",
                         imageUrl: "assets/images/pong_images/ping_pong.jpeg",
                         gameDescription:
-                            "Basic pong game implemented using sfml "),
+                            "Basic pong game implemented using sfml ",bash: '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Ping-Pong-Game.sh',),
                     SizedBox(
                       height: screenWidth * 0.05,
                     ),
@@ -52,7 +53,7 @@ class GamesGalleryDialog extends StatelessWidget {
                         gameTitle: "Tennis Game",
                         imageUrl: "assets/images/tennis_images/Tennis.jpg",
                         gameDescription:
-                            "Improved version of the pong game")
+                            "Improved version of the pong game",bash: '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Tennis-Game.sh',)
                   ],
                 ),
               ),
