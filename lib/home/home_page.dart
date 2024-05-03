@@ -77,11 +77,14 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Carrousel(imageList: [
-                            "assets/images/fps_images/FPS-game.png",
-                            "assets/images/pong_images/ping_pong.jpeg",
-                            "assets/images/tennis_images/Tennis.jpg",
-                          ])
+                          const Carrousel(
+                            imageList: [
+                              "assets/images/fps_images/FPS-game.png",
+                              "assets/images/pong_images/ping_pong.jpeg",
+                              "assets/images/tennis_images/Tennis.jpg",
+                            ],
+                            gameList: ["FPS Game", "Pong Game", "Tennis Game"],
+                          )
                         ],
                       ),
                     ),

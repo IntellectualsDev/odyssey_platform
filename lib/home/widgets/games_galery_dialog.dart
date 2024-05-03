@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:odyssey_platform/designWidgets/my_button.dart';
 import 'package:odyssey_platform/home/widgets/galery_game.dart';
 import 'package:odyssey_platform/theme/my_colors.dart';
 import 'package:odyssey_platform/theme/my_text_styles.dart';
+
 
 class GamesGalleryDialog extends StatelessWidget {
   @override
@@ -58,19 +60,12 @@ class GamesGalleryDialog extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: MyColors.action),
-              onPressed: () {
-                Navigator.pop(context); // Close the dialog
-              },
-              child: Text(
-                'Close',
-                style: MyTextStyles.buttonText(context),
-              ),
-            ),
+            MyButton(onPressed: (){Navigator.of(context).pop();},text: 'Close'),
           ],
         ),
       ),
     );
   }
 }
+
+
