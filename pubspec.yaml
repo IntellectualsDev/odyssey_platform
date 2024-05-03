@@ -77,7 +77,8 @@ flutter:
     - assets/games/FPS-Game
     - odyssey_platform.exe
     - "assets/images/fps_images/FPS-game.png"
-    - "assets/images/tennis_images/ping_pong.jpeg"
+    - "assets/images/pong_images/ping_pong.jpeg"
+    - "assets/images/tennis_images/Tennis.jpg"
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

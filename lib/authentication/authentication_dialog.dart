@@ -39,6 +39,7 @@ class _AuthenticationDialogState extends State<AuthenticationDialog> {
           children: [
             Text(
               widget.message,
+              textAlign: TextAlign.center,
               style: MyTextStyles.mainTitle(context),
             ),
             const SizedBox(

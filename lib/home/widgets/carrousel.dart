@@ -58,7 +58,11 @@ class _CarrouselState extends State<Carrousel> {
                   if (imageUrl == "assets/images/fps_images/FPS-game.png") {
                     runFPSgame();
                   } else if (imageUrl ==
-                      "assets/images/tennis_images/ping_pong.jpeg") {
+                      "assets/images/pong_images/ping_pong.jpeg") {
+                    runPongGame();
+                  }
+                  else if (imageUrl ==
+                      "assets/images/tennis_images/Tennis.jpg") {
                     runTennisGame();
                   }
                 }
@@ -98,7 +102,7 @@ class _CarrouselState extends State<Carrousel> {
 }
 
 // Define a function to run the executable
-void runTennisGame() async {
+void runPongGame() async {
   // Path to your executable file within the assets folder
   String executablePath = "./odyssey_platform/assets/games/FPS-Game";
   // Get the path of the executable file
@@ -138,6 +142,31 @@ void runFPSgame() async {
   // Execute the bash script
   var result = await Process.run('bash', [
     '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_FPS-Game.sh'
+  ]);
+
+  // Check if the process was successful
+  if (result.exitCode == 0) {
+    print('Executable started successfully.');
+  } else {
+    print('Error starting executable: ${result.stderr}');
+  }
+//}
+}
+
+void runTennisGame() async {
+  // Path to your executable file within the assets folder
+  String executablePath = "./odyssey_platform/assets/games/FPS-Game";
+  // Get the path of the executable file
+  String appDir = Directory.current.path;
+  debugPrint(appDir);
+  String fullPath = '$appDir/$executablePath';
+
+  // Check if the file exists
+  // if (await File(executablePath).exists()) {
+  // Run the executable file
+  // Execute the bash script
+  var result = await Process.run('bash', [
+    '/Users/pollorangel/FlutterProjects/odyssey_platform/odyssey_platform/assets/scripts/run_Tennis-Game.sh'
   ]);
 
   // Check if the process was successful
